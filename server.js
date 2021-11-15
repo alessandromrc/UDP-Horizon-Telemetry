@@ -198,8 +198,15 @@ function dataParser(message) {
 
 server.on("message", function (message, remote) {
     dataParser(message);
-    console.log("RPM : " +  forza_data[0].CurrentEngineRpm + " | Gear: " + forza_data[0].Gear +  " | Speed: " + ((forza_data[0].Speed) * (60*60)/1000) +  "km/h | Race Position: " + forza_data[0].RacePosition);
-
+    if (forza_data[0].isRaceOn) {
+        if (forza_data[0].CurrentEngineRpm >= (forza_data[0].EngineMaxRpm - 1200)) {
+            console.log("\x1b[31m", "RPM : " + parseInt(forza_data[0].CurrentEngineRpm) + " | Gear: " + forza_data[0].Gear + " | Speed: " + parseInt((forza_data[0].Speed) * (60 * 60) / 1000) + "km/h | Steer: " + forza_data[0].Steer);
+        } else if (forza_data[0].CurrentEngineRpm >= (forza_data[0].EngineMaxRpm - 2000)) {
+            console.log("\x1b[33m", "RPM : " + parseInt(forza_data[0].CurrentEngineRpm) + " | Gear: " + forza_data[0].Gear + " | Speed: " + parseInt((forza_data[0].Speed) * (60 * 60) / 1000) + "km/h | Steer: " + forza_data[0].Steer);
+        } else {
+            console.log("\x1b[32m", "RPM : " + parseInt(forza_data[0].CurrentEngineRpm) + " | Gear: " + forza_data[0].Gear + " | Speed: " + parseInt((forza_data[0].Speed) * (60 * 60) / 1000) + "km/h | Steer: " + forza_data[0].Steer);
+        }
+    }
 });
 
 server.bind(PORT, HOST);
