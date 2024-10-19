@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/gsbarreto/simple-udp-server-fm7#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.21.1"
   }
 }
